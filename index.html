@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paws of Hope - Their Eyes Speak What Words Cannot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #fafafa;
+      color: #444;
+      line-height: 1.7;
+      font-family: 'Open Sans', sans-serif;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+    }
+    .emphasis {
+      color: #e74c3c;
+      font-style: italic;
+    }
+    header {
+      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('header-banner.png') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+    .header-content {
+      max-width: 850px;
+      padding: 0 2rem;
+    }
+    header h1 {
+      font-size: 3.4rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    header p {
+      font-size: 1.4rem;
+      max-width: 750px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .btn {
+      display: inline-block;
+      padding: 1.1rem 2.8rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin: 0.5rem;
+    }
+    .btn-primary {
+      background-color: #e74c3c;
+      color: white;
+      box-shadow: 0px 4px 15px rgba(231, 76, 60, 0.4);
+    }
+    .btn-primary:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+    .btn-outline {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+    }
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section h2 {
+      color: #333;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+    section h2:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #e74c3c;
+      margin: 15px auto 0;
+    }
+    .highlight {
+      background-color: #fff5f5;
+      border-left: 4px solid #e74c3c;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+    }
+    .story-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .story {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .story:hover {
+      transform: translateY(-10px);
+    }
+    .story-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .story-content {
+      padding: 1.8rem;
+    }
+    .story h3 {
+      color: #e74c3c;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .story p {
+      margin-bottom: 1.2rem;
+    }
+    .testimonial {
+      font-style: italic;
+      color: #777;
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 3px solid #e74c3c;
+      margin: 1.5rem 0;
+    }
+    .urgent {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('urgent-banner.png') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+      margin: 3rem 0;
+    }
+    .urgent h2 {
+      color: white;
+    }
+    .urgent h2:after {
+      background: white;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+      margin: 4rem 0;
+    }
+    .stat-item {
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #e74c3c;
+      margin-bottom: 0.5rem;
+    }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      height: 250px;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.1);
+    }
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    .share-box {
+      text-align: center;
+      background: #fff5f5;
+      padding: 4rem 2rem;
+      border-radius: 12px;
+      margin-top: 4rem;
+    }
+    .share-box p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .social-icons a {
+      color: white;
+      background: #e74c3c;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .social-icons a:hover {
+      background: #c0392b;
+      transform: translateY(-5px);
+    }
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    footer p {
+      margin-bottom: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .heartbeat {
+      animation: heartbeat 1.5s ease infinite;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.1); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.1); }
+      70% { transform: scale(1); }
+    }
+    .cta-bottom {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('cta-banner.png') no-repeat center center/cover;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .cta-bottom h2 {
+      color: white;
+      font-size: 2.8rem;
+    }
+    .cta-bottom p {
+      max-width: 700px;
+      margin: 1.5rem auto 2.5rem;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Their Eyes Speak What Words Cannot</h1>
+      <p>Every day, innocent souls suffer in silence. The pain in their eyes tells stories of abandonment, abuse, and loneliness. But <span class="emphasis">you</span> can be the miracle they've been praying for. Your compassion can transform their pain into hope.</p>
+      <div>
+        <button class="btn btn-primary heartbeat">Save a Life Today</button>
+        <a href="#stories" class="btn btn-outline">See Who Needs You</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>The Heartbreaking Reality</h2>
+    <p>Behind each pair of innocent eyes lies a story of survival. They don't understand why they were abandoned, why they must endure pain, or why no one hears their silent cries. These vulnerable souls need someone who sees their worth beyond their wounds.</p>
+    
+    <div class="highlight">
+      "The greatness of a nation and its moral progress can be judged by the way its animals are treated." - Mahatma Gandhi
+    </div>
+    
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">437</div>
+        <p>Animals rescued this year</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">298</div>
+        <p>Found loving homes</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">46</div>
+        <p>Currently in emergency care</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <p>Need your support</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stories">
+    <h2>Stories That Need Your Heart</h2>
+    <p>Each of these innocent souls carries wounds both visible and invisible. Your kindness can be the turning point in their journey from pain to peace.</p>
+    
+    <div class="story-container">
+      <div class="story">
+        <img src="buddy.png" alt="Dog wearing a protective cone" class="story-img">
+        <div class="story-content">
+          <h3>Buddy's Fight for Tomorrow</h3>
+          <p>Found with deep wounds and broken spirits, Buddy endured surgery and now wears his cone of recovery. His eyes still hold fear, but for the first time, there's also hope. Every day is a battle, but he's not giving up.</p>
+          <div class="testimonial">
+            "I may not understand why I was abandoned, but I'm learning to trust again. Will you help me heal completely?"
+          </div>
+          <a href="#" class="btn btn-primary">Help Buddy Heal</a>
+        </div>
+      </div>
+      
+      <div class="story">
+        <img src="luna.png" alt="Thin stray dog on street" class="story-img">
+        <div class="story-content">
+          <h3>Luna's Silent Hunger</h3>
+          <p>Every rib visible, every step uncertain - Luna has survived on scraps and kindness of strangers. She doesn't know what a full meal feels like or what it means to sleep without fear. Her eyes look at you with questions no innocent being should have to ask.</p>
+          <div class="testimonial">
+            "I've never known what it means to be cherished. Could you show me?"
+          </div>
+          <a href="#" class="btn btn-primary">Feed Luna's Hope</a>
+        </div>
+      </div>
+      
+      <div class="story">
+        <img src="max.png" alt="Injured dog with wounds" class="story-img">
+        <div class="story-content">
+          <h3>Max's Scars of Survival</h3>
+          <p>The wounds covering Max's body tell a story of unimaginable cruelty. Found lying in pain on cold concrete, he still managed to wag his tail when our rescuers approached. Despite everything humans have done to him, he hasn't lost faith in kindness.</p>
+          <div class="testimonial">
+            "My body is broken, but my spirit still believes in goodness. Please don't turn away."
+          </div>
+          <a href="#" class="btn btn-primary">Heal Max's Wounds</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="urgent">
+    <h2>URGENT: They Cannot Wait Another Day</h2>
+    <p>Right now, a tiny kitten fights for its next breath. A wounded dog prays for the pain to end. An abandoned mother cat desperately tries to feed her babies. Every minute matters in their fragile lives.</p>
+    <button class="btn btn-primary heartbeat">Respond Now</button>
+  </div>
+
+  <section>
+    <h2>Tiny Lives, Enormous Need</h2>
+    <p>The smallest beings often face the biggest struggles. Orphaned kittens and puppies require round-the-clock care just to survive another day. Your support provides the bottle feedings, warmth, and medical attention these tiny fighters need.</p>
+    
+    <div class="story-container">
+      <div class="story">
+        <img src="whisper.png" alt="Tiny kitten being bottle-fed" class="story-img">
+        <div class="story-content">
+          <h3>Whisper's Fight For Life</h3>
+          <p>At just two weeks old, Whisper was found abandoned, cold, and crying. Too young to eat solid food, she depends on bottle feeding every two hours - day and night. Each feeding is a battle between life and death. Her tiny body struggles, but her spirit fights on.</p>
+          <div class="testimonial">
+            "I'm so small, but I want to live. I just need someone to believe in me."
+          </div>
+          <a href="#" class="btn btn-primary">Give Whisper a Chance</a>
+        </div>
+      </div>
+      
+      <div class="story">
+        <img src="miracle-workers.png" alt="Person holding a rescue kitten" class="story-img">
+        <div class="story-content">
+          <h3>The Miracle Workers</h3>
+          <p>Our volunteers become surrogate mothers to abandoned babies, giving up sleep and comfort to save lives that hang by a thread. Each successful rescue is a miracle born of sacrifice and love. Behind every surviving animal is a human who refused to give up.</p>
+          <div class="testimonial">
+            "Sometimes I cry from exhaustion, but when a tiny life is saved, it's all worth it."
+          </div>
+          <a href="#" class="btn btn-primary">Support Our Heroes</a>
+        </div>
+      </div>
+      
+      <div class="story">
+        <img src="family-forgotten.png" alt="Group of rescued kittens" class="story-img">
+        <div class="story-content">
+          <h3>Family of the Forgotten</h3>
+          <p>Thirteen kittens from five different litters, all abandoned, now huddle together for warmth and comfort. They've created their own family in the midst of tragedy. Each day brings new challenges as we struggle to meet their growing needs with limited resources.</p>
+          <div class="testimonial">
+            "We may have been thrown away, but together we are strong. Will you become part of our family?"
+          </div>
+          <a href="#" class="btn btn-primary">Help This Family Thrive</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Moments That Make It All Worthwhile</h2>
+    <p>Through the darkness of rescue work shine moments of pure joy. The first purr from a formerly abused cat. The first playful bounce from a dog who once cowered in fear. These are the miracles your support creates.</p>
+    
+    <div class="photo-gallery">
+      <div class="gallery-item">
+        <img src="rocky.png" class="gallery-img" alt="Rescued dog playing">
+        <div class="gallery-caption">Rocky's first day of play after 3 years of chains</div>
+      </div>
+      <div class="gallery-item">
+        <img src="misty.png" class="gallery-img" alt="Cat being adopted">
+        <div class="gallery-caption">Misty meeting her forever family after 189 days waiting</div>
+      </div>
+      <div class="gallery-item">
+        <img src="leo.png" class="gallery-img" alt="Healed puppy">
+        <div class="gallery-caption">Leo's wounds fully healed - before and after</div>
+      </div>
+      <div class="gallery-item">
+        <img src="volunteers.png" class="gallery-img" alt="Volunteer with animals">
+        <div class="gallery-caption">Our volunteers give love that heals deeper than medicine</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="share-box">
+    <h2>Your Share Saves Lives</h2>
+    <p>Every share brings us closer to a rescuer. Every post connects us to a potential adopter. Your voice can reach where ours cannot. Be their ambassador of hope in a world that too often looks away.</p>
+    <div class="social-icons">
+      <a href="#" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" title="Share on Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" title="Share via Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+
+  <div class="cta-bottom">
+    <h2>They Cannot Ask For Help, But We Can</h2>
+    <p>In their darkest hour, be the light they desperately seek. Your compassion today becomes their miracle tomorrow. Every donation, no matter how small, holds the power to transform pain into possibility.</p>
+    <button class="btn btn-primary heartbeat">Become Their Miracle</button>
+  </div>
+
+  <footer>
+    <p>"The animals of the world exist for their own reasons. They were not made for humans any more than black people were made for white, or women created for men."</p>
+    <p>― Alice Walker</p>
+    <p>&copy; 2025 Paws of Hope. Every life matters.</p>
+  </footer>
+</body>
+</html>
