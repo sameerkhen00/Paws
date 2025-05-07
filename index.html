@@ -13,7 +13,7 @@
       box-sizing: border-box;
     }
     body {
-      background-color: #fafafa;
+      background-color: #d0e0d0;
       color: #444;
       line-height: 1.7;
       font-family: 'Open Sans', sans-serif;
@@ -40,12 +40,12 @@
       padding: 0 2rem;
     }
     header h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       margin-bottom: 1.2rem;
       line-height: 1.2;
     }
     header p {
-      font-size: 1.4rem;
+      font-size: 1.0rem;
       max-width: 750px;
       margin: 0 auto 2.5rem;
       line-height: 1.8;
@@ -287,6 +287,71 @@
       margin: 1.5rem auto 2.5rem;
       font-size: 1.3rem;
     }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      overflow: auto;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      animation: modalopen 0.4s;
+    }
+    @keyframes modalopen {
+      from {opacity: 0; transform: translateY(-60px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #777;
+    }
+    .close-modal:hover {
+      color: #e74c3c;
+    }
+    .donation-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .donation-button {
+      padding: 1rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #e74c3c;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .donation-button:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+    .custom-amount {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -295,7 +360,7 @@
       <h1>Their Eyes Speak What Words Cannot</h1>
       <p>Every day, innocent souls suffer in silence. The pain in their eyes tells stories of abandonment, abuse, and loneliness. But <span class="emphasis">you</span> can be the miracle they've been praying for. Your compassion can transform their pain into hope.</p>
       <div>
-        <button class="btn btn-primary heartbeat">Save a Life Today</button>
+        <a href="#" class="btn btn-primary heartbeat donate-btn" data-animal="general">Save a Life Today</a>
         <a href="#stories" class="btn btn-outline">See Who Needs You</a>
       </div>
     </div>
@@ -342,7 +407,7 @@
           <div class="testimonial">
             "I may not understand why I was abandoned, but I'm learning to trust again. Will you help me heal completely?"
           </div>
-          <a href="#" class="btn btn-primary">Help Buddy Heal</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="Buddy">Help Buddy Heal</a>
         </div>
       </div>
       
@@ -354,7 +419,7 @@
           <div class="testimonial">
             "I've never known what it means to be cherished. Could you show me?"
           </div>
-          <a href="#" class="btn btn-primary">Feed Luna's Hope</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="Luna">Feed Luna's Hope</a>
         </div>
       </div>
       
@@ -366,7 +431,7 @@
           <div class="testimonial">
             "My body is broken, but my spirit still believes in goodness. Please don't turn away."
           </div>
-          <a href="#" class="btn btn-primary">Heal Max's Wounds</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="Max">Heal Max's Wounds</a>
         </div>
       </div>
     </div>
@@ -375,7 +440,7 @@
   <div class="urgent">
     <h2>URGENT: They Cannot Wait Another Day</h2>
     <p>Right now, a tiny kitten fights for its next breath. A wounded dog prays for the pain to end. An abandoned mother cat desperately tries to feed her babies. Every minute matters in their fragile lives.</p>
-    <button class="btn btn-primary heartbeat">Respond Now</button>
+    <a href="#" class="btn btn-primary heartbeat donate-btn" data-animal="urgent">Respond Now</a>
   </div>
 
   <section>
@@ -391,7 +456,7 @@
           <div class="testimonial">
             "I'm so small, but I want to live. I just need someone to believe in me."
           </div>
-          <a href="#" class="btn btn-primary">Give Whisper a Chance</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="Whisper">Give Whisper a Chance</a>
         </div>
       </div>
       
@@ -403,7 +468,7 @@
           <div class="testimonial">
             "Sometimes I cry from exhaustion, but when a tiny life is saved, it's all worth it."
           </div>
-          <a href="#" class="btn btn-primary">Support Our Heroes</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="volunteers">Support Our Heroes</a>
         </div>
       </div>
       
@@ -415,7 +480,7 @@
           <div class="testimonial">
             "We may have been thrown away, but together we are strong. Will you become part of our family?"
           </div>
-          <a href="#" class="btn btn-primary">Help This Family Thrive</a>
+          <a href="#" class="btn btn-primary donate-btn" data-animal="kitten-family">Help This Family Thrive</a>
         </div>
       </div>
     </div>
@@ -460,13 +525,108 @@
   <div class="cta-bottom">
     <h2>They Cannot Ask For Help, But We Can</h2>
     <p>In their darkest hour, be the light they desperately seek. Your compassion today becomes their miracle tomorrow. Every donation, no matter how small, holds the power to transform pain into possibility.</p>
-    <button class="btn btn-primary heartbeat">Become Their Miracle</button>
+    <a href="#" class="btn btn-primary heartbeat donate-btn" data-animal="miracle">Become Their Miracle</a>
+  </div>
+
+  <!-- Donation Modal -->
+  <div id="donation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Make a Difference for <span id="animal-name">them</span></h2>
+      <p>Your donation will directly help provide medical care, food, shelter, and love to animals in need.</p>
+      <p>Choose an amount to donate or enter your own:</p>
+      <div class="donation-options">
+        <button class="donation-button" data-amount="500">₹500</button>
+        <button class="donation-button" data-amount="1000">₹1,000</button>
+        <button class="donation-button" data-amount="2500">₹2,500</button>
+        <button class="donation-button" data-amount="5000">₹5,000</button>
+        <input type="number" class="custom-amount" placeholder="Enter custom amount" min="10">
+      </div>
+      <a href="#" id="whatsapp-donate" class="btn btn-primary">Donate via WhatsApp</a>
+    </div>
   </div>
 
   <footer>
     <p>"The animals of the world exist for their own reasons. They were not made for humans any more than black people were made for white, or women created for men."</p>
-    <p>― Alice Walker</p>
+    <p>― Sameer Magar</p>
     <p>&copy; 2025 Paws of Hope. Every life matters.</p>
   </footer>
+
+  <script>
+    // Get the modal
+    const modal = document.getElementById('donation-modal');
+    const animalName = document.getElementById('animal-name');
+    const closeModal = document.querySelector('.close-modal');
+    const donateButtons = document.querySelectorAll('.donate-btn');
+    const amountButtons = document.querySelectorAll('.donation-button');
+    const customAmount = document.querySelector('.custom-amount');
+    const whatsappDonate = document.getElementById('whatsapp-donate');
+    
+    let selectedAmount = 0;
+    let selectedAnimal = '';
+
+    // Add click event to all donate buttons
+    donateButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        selectedAnimal = this.getAttribute('data-animal');
+        animalName.textContent = selectedAnimal === 'general' || selectedAnimal === 'urgent' || selectedAnimal === 'miracle' ? 'animals in need' : selectedAnimal;
+        modal.style.display = 'block';
+      });
+    });
+
+    // Close the modal when clicking on X
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Close the modal when clicking outside of it
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Handle amount selection
+    amountButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        amountButtons.forEach(btn => btn.style.backgroundColor = '#e74c3c');
+        // Add active class to clicked button
+        this.style.backgroundColor = '#c0392b';
+        selectedAmount = this.getAttribute('data-amount');
+        customAmount.value = ''; // Clear custom amount
+      });
+    });
+
+    // Handle custom amount
+    customAmount.addEventListener('input', function() {
+      // Remove active class from all buttons
+      amountButtons.forEach(btn => btn.style.backgroundColor = '#e74c3c');
+      selectedAmount = this.value;
+    });
+
+    // WhatsApp donation handler
+    whatsappDonate.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Use the custom amount if entered, otherwise use selected amount
+      const donationAmount = customAmount.value || selectedAmount;
+      
+      if (!donationAmount || donationAmount < 10) {
+        alert('Please select or enter a valid donation amount.');
+        return;
+      }
+      
+      const message = `Hello, I would like to donate ₹${donationAmount} to help ${animalName.textContent}. Please guide me on how to proceed with the payment.`;
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Create WhatsApp URL with your phone number
+      const whatsappURL = `https://wa.me/9779847699795?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.location.href = whatsappURL;
+    });
+  </script>
 </body>
-            </html>
+      </html>
