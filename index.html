@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paws of Hope - Their Eyes Speak What Words Cannot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * {
@@ -15,46 +15,56 @@
     body {
       background-color: #fafafa;
       color: #444;
-      line-height: 1.7;
+      line-height: 1.6;
       font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
     }
     h1, h2, h3, h4 {
-      font-family: 'Merriweather', serif;
-      font-weight: 700;
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      line-height: 1.3;
     }
     .emphasis {
       color: #e74c3c;
       font-style: italic;
     }
     header {
-      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('header-banner.png') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)), url('header-banner.png') no-repeat center center/cover;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       text-align: center;
+      position: relative;
     }
     .header-content {
-      max-width: 850px;
-      padding: 0 2rem;
+      max-width: 800px;
+      padding: 0 1.5rem;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     header h1 {
-      font-size: 3.4rem;
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
       margin-bottom: 1.5rem;
-      line-height: 1.2;
+      line-height: 1.1;
+      text-shadow: 0px 2px 4px rgba(0,0,0,0.4);
     }
     header p {
-      font-size: 1.4rem;
-      max-width: 750px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.8;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
       font-weight: 300;
+      text-shadow: 0px 2px 3px rgba(0,0,0,0.3);
     }
     .btn {
       display: inline-block;
-      padding: 1.1rem 2.8rem;
-      font-size: 1.2rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 1rem;
       font-weight: 600;
       border: none;
       border-radius: 50px;
@@ -62,6 +72,7 @@
       transition: all 0.3s ease;
       text-decoration: none;
       margin: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
     .btn-primary {
       background-color: #e74c3c;
@@ -83,115 +94,156 @@
       transform: translateY(-3px);
     }
     section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
+      padding: 4rem 1.5rem;
+      max-width: 1100px;
       margin: auto;
     }
     section h2 {
       color: #333;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
       text-align: center;
       position: relative;
     }
     section h2:after {
       content: '';
       display: block;
-      width: 80px;
+      width: 60px;
       height: 3px;
       background: #e74c3c;
-      margin: 15px auto 0;
+      margin: 12px auto 0;
+    }
+    section p {
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      text-align: center;
     }
     .highlight {
       background-color: #fff5f5;
       border-left: 4px solid #e74c3c;
-      padding: 1.5rem;
-      margin: 2rem 0;
+      padding: 1.2rem;
+      margin: 1.5rem auto;
       font-style: italic;
+      max-width: 800px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
     .story-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
     }
     .story {
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .story:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
     }
     .story-img {
       width: 100%;
-      height: 250px;
+      height: 220px;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .story:hover .story-img {
+      transform: scale(1.05);
     }
     .story-content {
-      padding: 1.8rem;
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     .story h3 {
       color: #e74c3c;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
     }
     .story p {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      font-size: 0.95rem;
+      flex: 1;
     }
     .testimonial {
       font-style: italic;
-      color: #777;
+      color: #666;
       position: relative;
-      padding-left: 1.5rem;
+      padding-left: 1.2rem;
       border-left: 3px solid #e74c3c;
-      margin: 1.5rem 0;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
     .urgent {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('urgent-banner.png') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.75)), url('urgent-banner.png') no-repeat center center/cover;
       color: white;
       text-align: center;
-      padding: 6rem 2rem;
-      margin: 3rem 0;
+      padding: 5rem 1.5rem;
+      margin: 2rem 0;
     }
     .urgent h2 {
       color: white;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
     }
     .urgent h2:after {
       background: white;
     }
+    .urgent p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      max-width: 700px;
+      margin: 1.5rem auto 2rem;
+    }
     .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
       text-align: center;
-      margin: 4rem 0;
+      margin: 3rem 0;
     }
     .stat-item {
-      padding: 2rem;
+      padding: 1.8rem 1rem;
       background: white;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-5px);
     }
     .stat-number {
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 700;
       color: #e74c3c;
       margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .stat-item p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
     }
     .photo-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 8px;
-      height: 250px;
+      height: 220px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     .gallery-img {
       width: 100%;
@@ -206,9 +258,10 @@
       right: 0;
       background: rgba(0,0,0,0.7);
       color: white;
-      padding: 1rem;
+      padding: 0.8rem;
       transform: translateY(100%);
       transition: transform 0.3s ease;
+      font-size: 0.9rem;
     }
     .gallery-item:hover .gallery-img {
       transform: scale(1.1);
@@ -218,74 +271,192 @@
     }
     .share-box {
       text-align: center;
-      background: #fff5f5;
-      padding: 4rem 2rem;
+      background: linear-gradient(to right, #fff5f5, #ffecec);
+      padding: 3.5rem 1.5rem;
       border-radius: 12px;
-      margin-top: 4rem;
+      margin-top: 3.5rem;
+      box-shadow: 0 5px 20px rgba(231, 76, 60, 0.1);
     }
     .share-box p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 1.8rem;
+      line-height: 1.7;
     }
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
     }
     .social-icons a {
       color: white;
       background: #e74c3c;
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
     }
     .social-icons a:hover {
       background: #c0392b;
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.1);
     }
     footer {
       background-color: #222;
       color: white;
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 3rem 1.5rem;
+      margin-top: 2rem;
     }
     footer p {
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      font-size: 0.95rem;
+      opacity: 0.9;
     }
     .heartbeat {
       animation: heartbeat 1.5s ease infinite;
+      position: relative;
+    }
+    .heartbeat:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50px;
+      box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+      }
     }
     @keyframes heartbeat {
       0% { transform: scale(1); }
-      14% { transform: scale(1.1); }
+      14% { transform: scale(1.08); }
       28% { transform: scale(1); }
-      42% { transform: scale(1.1); }
+      42% { transform: scale(1.08); }
       70% { transform: scale(1); }
     }
     .cta-bottom {
       background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('cta-banner.png') no-repeat center center/cover;
-      padding: 5rem 2rem;
+      padding: 4.5rem 1.5rem;
       text-align: center;
       color: white;
     }
     .cta-bottom h2 {
       color: white;
-      font-size: 2.8rem;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .cta-bottom p {
       max-width: 700px;
-      margin: 1.5rem auto 2.5rem;
-      font-size: 1.3rem;
+      margin: 1.5rem auto 2.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.7;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.7);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+      40% {transform: translateY(-20px) translateX(-50%);}
+      60% {transform: translateY(-10px) translateX(-50%);}
+    }
+    .tear-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    .tear-effect:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 20px;
+      background: rgba(231, 76, 60, 0.5);
+      border-radius: 50%;
+      opacity: 0;
+      animation: tear 6s infinite;
+    }
+    @keyframes tear {
+      0% {opacity: 0; transform: translateY(-20px);}
+      30% {opacity: 0.7;}
+      100% {opacity: 0; transform: translateY(100px);}
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      section {
+        padding: 3rem 1.2rem;
+      }
+      .story-container {
+        gap: 1.5rem;
+      }
+      .highlight {
+        padding: 1rem;
+        margin: 1.2rem auto;
+      }
+      .stats {
+        gap: 1rem;
+      }
+      .stat-number {
+        font-size: 2.3rem;
+      }
+      .header-content {
+        padding: 0 1rem;
+      }
+      .urgent, .cta-bottom {
+        padding: 3.5rem 1.2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        margin-bottom: 1rem;
+      }
+      .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+      }
+      .story-img {
+        height: 180px;
+      }
+      .story-content {
+        padding: 1.2rem;
+      }
+      .gallery-item {
+        height: 180px;
+      }
+      .gallery-caption {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
@@ -293,19 +464,22 @@
   <header>
     <div class="header-content">
       <h1>Their Eyes Speak What Words Cannot</h1>
-      <p>Every day, innocent souls suffer in silence. The pain in their eyes tells stories of abandonment, abuse, and loneliness. But <span class="emphasis">you</span> can be the miracle they've been praying for. Your compassion can transform their pain into hope.</p>
+      <p>Every day, innocent souls suffer in silence. The pain in their eyes tells stories of abandonment, abuse, and loneliness. But <span class="emphasis">you</span> can be the miracle they've been praying for.</p>
       <div>
         <button class="btn btn-primary heartbeat">Save a Life Today</button>
         <a href="#stories" class="btn btn-outline">See Who Needs You</a>
       </div>
     </div>
+    <a href="#stories" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
   </header>
 
   <section>
     <h2>The Heartbreaking Reality</h2>
-    <p>Behind each pair of innocent eyes lies a story of survival. They don't understand why they were abandoned, why they must endure pain, or why no one hears their silent cries. These vulnerable souls need someone who sees their worth beyond their wounds.</p>
+    <p>Behind each pair of innocent eyes lies a story of survival. They don't understand why they were abandoned, why they must endure pain, or why no one hears their silent cries.</p>
     
-    <div class="highlight">
+    <div class="highlight tear-effect">
       "The greatness of a nation and its moral progress can be judged by the way its animals are treated." - Mahatma Gandhi
     </div>
     
@@ -324,7 +498,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-number">100%</div>
-        <p>Need your support</p>
+        <p>Need your compassion</p>
       </div>
     </div>
   </section>
@@ -338,7 +512,7 @@
         <img src="buddy.png" alt="Dog wearing a protective cone" class="story-img">
         <div class="story-content">
           <h3>Buddy's Fight for Tomorrow</h3>
-          <p>Found with deep wounds and broken spirits, Buddy endured surgery and now wears his cone of recovery. His eyes still hold fear, but for the first time, there's also hope. Every day is a battle, but he's not giving up.</p>
+          <p>Found with deep wounds and broken spirits, Buddy endured surgery and now wears his cone of recovery. His eyes still hold fear, but for the first time, there's also hope.</p>
           <div class="testimonial">
             "I may not understand why I was abandoned, but I'm learning to trust again. Will you help me heal completely?"
           </div>
@@ -350,7 +524,7 @@
         <img src="luna.png" alt="Thin stray dog on street" class="story-img">
         <div class="story-content">
           <h3>Luna's Silent Hunger</h3>
-          <p>Every rib visible, every step uncertain - Luna has survived on scraps and kindness of strangers. She doesn't know what a full meal feels like or what it means to sleep without fear. Her eyes look at you with questions no innocent being should have to ask.</p>
+          <p>Every rib visible, every step uncertain - Luna has survived on scraps and kindness of strangers. She doesn't know what a full meal feels like or what it means to sleep without fear.</p>
           <div class="testimonial">
             "I've never known what it means to be cherished. Could you show me?"
           </div>
@@ -362,7 +536,7 @@
         <img src="max.png" alt="Injured dog with wounds" class="story-img">
         <div class="story-content">
           <h3>Max's Scars of Survival</h3>
-          <p>The wounds covering Max's body tell a story of unimaginable cruelty. Found lying in pain on cold concrete, he still managed to wag his tail when our rescuers approached. Despite everything humans have done to him, he hasn't lost faith in kindness.</p>
+          <p>The wounds covering Max's body tell a story of unimaginable cruelty. Despite everything humans have done to him, he hasn't lost faith in kindness.</p>
           <div class="testimonial">
             "My body is broken, but my spirit still believes in goodness. Please don't turn away."
           </div>
@@ -380,14 +554,14 @@
 
   <section>
     <h2>Tiny Lives, Enormous Need</h2>
-    <p>The smallest beings often face the biggest struggles. Orphaned kittens and puppies require round-the-clock care just to survive another day. Your support provides the bottle feedings, warmth, and medical attention these tiny fighters need.</p>
+    <p>The smallest beings often face the biggest struggles. Orphaned kittens and puppies require round-the-clock care just to survive another day.</p>
     
     <div class="story-container">
       <div class="story">
         <img src="whisper.png" alt="Tiny kitten being bottle-fed" class="story-img">
         <div class="story-content">
           <h3>Whisper's Fight For Life</h3>
-          <p>At just two weeks old, Whisper was found abandoned, cold, and crying. Too young to eat solid food, she depends on bottle feeding every two hours - day and night. Each feeding is a battle between life and death. Her tiny body struggles, but her spirit fights on.</p>
+          <p>At just two weeks old, Whisper was found abandoned, cold, and crying. Too young to eat solid food, she depends on bottle feeding every two hours - day and night.</p>
           <div class="testimonial">
             "I'm so small, but I want to live. I just need someone to believe in me."
           </div>
@@ -399,7 +573,7 @@
         <img src="miracle-workers.png" alt="Person holding a rescue kitten" class="story-img">
         <div class="story-content">
           <h3>The Miracle Workers</h3>
-          <p>Our volunteers become surrogate mothers to abandoned babies, giving up sleep and comfort to save lives that hang by a thread. Each successful rescue is a miracle born of sacrifice and love. Behind every surviving animal is a human who refused to give up.</p>
+          <p>Our volunteers become surrogate mothers to abandoned babies, giving up sleep and comfort to save lives that hang by a thread. Each successful rescue is a miracle born of sacrifice and love.</p>
           <div class="testimonial">
             "Sometimes I cry from exhaustion, but when a tiny life is saved, it's all worth it."
           </div>
@@ -411,7 +585,7 @@
         <img src="family-forgotten.png" alt="Group of rescued kittens" class="story-img">
         <div class="story-content">
           <h3>Family of the Forgotten</h3>
-          <p>Thirteen kittens from five different litters, all abandoned, now huddle together for warmth and comfort. They've created their own family in the midst of tragedy. Each day brings new challenges as we struggle to meet their growing needs with limited resources.</p>
+          <p>Thirteen kittens from five different litters, all abandoned, now huddle together for warmth and comfort. They've created their own family in the midst of tragedy.</p>
           <div class="testimonial">
             "We may have been thrown away, but together we are strong. Will you become part of our family?"
           </div>
@@ -423,7 +597,7 @@
 
   <section>
     <h2>Moments That Make It All Worthwhile</h2>
-    <p>Through the darkness of rescue work shine moments of pure joy. The first purr from a formerly abused cat. The first playful bounce from a dog who once cowered in fear. These are the miracles your support creates.</p>
+    <p>Through the darkness of rescue work shine moments of pure joy. The first purr from a formerly abused cat. The first playful bounce from a dog who once cowered in fear.</p>
     
     <div class="photo-gallery">
       <div class="gallery-item">
@@ -468,5 +642,43 @@
     <p>― Alice Walker</p>
     <p>&copy; 2025 Paws of Hope. Every life matters.</p>
   </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Add scroll animation for elements
+    window.addEventListener('scroll', function() {
+      const elements = document.querySelectorAll('.story, .stat-item, .gallery-item');
+      elements.forEach(element => {
+        const position = element.getBoundingClientRect();
+        if(position.top < window.innerHeight && position.bottom >= 0) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    });
+    
+    // Initialize elements with fade-in effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const elements = document.querySelectorAll('.story, .stat-item, .gallery-item');
+      elements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
+      
+      setTimeout(() => {
+        window.scrollBy(0, 1); // Trigger scroll event
+      }, 100);
+    });
+  </script>
 </body>
 </html>
